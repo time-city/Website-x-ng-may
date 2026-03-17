@@ -91,89 +91,171 @@
 
         /* ====== SIDEBAR ====== */
         .cat-sidebar { position: sticky; top: 80px; }
+        /* ====== SIDEBAR ====== */
+        .cat-sidebar { position: sticky; top: 80px; }
         .cat-sidebar__box {
             background: white;
             border: 1px solid #e5e7eb;
             border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
         .cat-sidebar__box-title {
-            background: #f8fafb;
-            border-bottom: 2px solid #F37021;
-            padding: 12px 16px;
+            padding: 16px 16px 4px;
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
-            font-weight: 800;
+            font-weight: 700;
             color: #0F2A44;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
-        .cat-sidebar__menu { list-style: none; padding: 0; margin: 0; }
+        .cat-sidebar__box-title::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: #F37021;
+            margin-top: 8px;
+        }
+        .cat-sidebar__box-subtitle {
+            padding: 0 16px 12px;
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .cat-sidebar__menu { list-style: none; padding: 0; margin: 0; border-top: 1px solid #f0f0f0; }
         .cat-sidebar__menu li { border-bottom: 1px solid #f0f0f0; }
         .cat-sidebar__menu li:last-child { border-bottom: none; }
-        .cat-sidebar__menu a {
+        
+        /* Parent Category */
+        .cat-sidebar__menu .parent-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 11px 16px;
-            font-size: 13.5px;
+            padding: 12px 16px;
+            font-size: 15px;
+            color: #0F2A44;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+        .cat-sidebar__menu .parent-link:hover {
+            background: #f9f9f9;
+            border-left-color: #F37021;
+        }
+        
+        /* Parent Open/Active State */
+        .cat-sidebar__menu li.has-submenu.open > .parent-link {
+            background: #fafafa;
+            border-left-color: #F37021;
+        }
+        
+        .cat-sidebar__menu .arrow {
+            font-size: 10px;
+            transition: transform 200ms ease;
+            color: #0F2A44;
+        }
+        .cat-sidebar__menu li.has-submenu.open > .parent-link .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Submenu */
+        .cat-sidebar__submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: #fff;
+            display: none;
+            padding-bottom: 8px;
+        }
+        .cat-sidebar__menu li.has-submenu.open .cat-sidebar__submenu {
+            display: block;
+        }
+        
+        .cat-sidebar__submenu a {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px 8px 32px;
+            font-size: 14px;
             color: #444;
             text-decoration: none;
             transition: all 0.2s;
-            font-weight: 500;
+            position: relative;
         }
-        .cat-sidebar__menu a:hover,
-        .cat-sidebar__menu a.active {
-            color: #F37021;
-            background: #fff8f5;
+        .cat-sidebar__submenu a::before {
+            content: "";
+            position: absolute;
+            left: 20px;
+            width: 4px;
+            height: 4px;
+            background: transparent;
+            border-radius: 50%;
+            transition: all 0.2s;
         }
-        .cat-sidebar__menu a.active {
-            font-weight: 700;
-            border-left: 3px solid #F37021;
-            padding-left: 13px;
+        .cat-sidebar__submenu a:hover {
+            color: #0F2A44;
         }
-        .cat-sidebar__menu .sub-menu {
-            padding-left: 16px;
-            background: #fafafa;
+        
+        /* Subcategory Active State */
+        .cat-sidebar__submenu a.active {
+            font-weight: 600;
+            color: #0F2A44;
+            background: transparent;
         }
-        .cat-sidebar__menu .sub-menu a {
-            font-size: 13px;
-            color: #777;
-            padding: 8px 16px;
+        .cat-sidebar__submenu a.active::before {
+            background: #F37021;
         }
-        .cat-sidebar__menu .arrow { font-size: 11px; color: #bbb; }
 
         /* Price filter */
-        .cat-sidebar__filter { padding: 16px; }
-        .cat-price-inputs { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
-        .cat-price-inputs input {
+        .cat-sidebar__filter { padding: 8px 16px 20px; border-top: 1px solid #f0f0f0; padding-top: 16px; }
+        .cat-price-inputs { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+        .input-with-unit {
+            position: relative;
             flex: 1;
+        }
+        .input-with-unit input {
+            width: 100%;
             border: 1px solid #ddd;
             border-radius: 4px;
-            padding: 7px 10px;
-            font-size: 13px;
+            padding: 10px 10px;
+            font-size: 14px;
             color: #333;
             outline: none;
-            width: 100%;
         }
-        .cat-price-inputs input:focus { border-color: #0F2A44; }
+        .input-with-unit input:focus { border-color: #0F2A44; }
         .cat-price-sep { font-size: 13px; color: #aaa; flex-shrink: 0; }
+        
+        .cat-price-helper {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
         .cat-filter-btn {
             width: 100%;
-            padding: 9px;
-            background: #0F2A44;
+            padding: 12px;
+            background: #ffab7d; /* Cam nhạt */
             color: white;
             border: none;
             border-radius: 4px;
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            font-family: 'Outfit', sans-serif;
             text-transform: uppercase;
-            transition: background 0.2s;
+            transition: all 0.3s;
+            letter-spacing: 1px;
         }
         .cat-filter-btn:hover { background: #F37021; }
+        
+        .cat-price-note {
+            font-size: 11px;
+            color: #999;
+            margin-top: 12px;
+            line-height: 1.4;
+        }
 
         /* Contact sidebar box */
         .cat-contact-box {
@@ -440,38 +522,30 @@
 
             <!-- Category Menu -->
             <div class="cat-sidebar__box">
-                <div class="cat-sidebar__box-title">Danh mục sản phẩm</div>
-                <ul class="cat-sidebar__menu">
-                    <li>
-                        <a href="category.html" class="active">
-                            Đồng phục công sở
-                            <span class="arrow">&#9660;</span>
-                        </a>
-                        <ul class="cat-sidebar__menu sub-menu">
-                            <li><a href="product.html">Áo sơ mi dài tay</a></li>
-                            <li><a href="product.html">Áo sơ mi ngắn tay</a></li>
-                            <li><a href="product.html">Bộ vest công sở</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="category.html">Đồng phục nhà máy <span class="arrow">&#9658;</span></a></li>
-                    <li><a href="category.html">Áo bảo hộ phản quang <span class="arrow">&#9658;</span></a></li>
-                    <li><a href="category.html">Đồng phục y tế <span class="arrow">&#9658;</span></a></li>
-                    <li><a href="category.html">Áo Polo doanh nghiệp <span class="arrow">&#9658;</span></a></li>
-                    <li><a href="category.html">Đồng phục trường học <span class="arrow">&#9658;</span></a></li>
-                    <li><a href="category.html">Vải sỉ công nghiệp <span class="arrow">&#9658;</span></a></li>
+                <div class="cat-sidebar__box-title">DANH MỤC SẢN PHẨM</div>
+                <div class="cat-sidebar__box-subtitle">Chọn nhóm sản phẩm phù hợp nhu cầu.</div>
+                <ul class="cat-sidebar__menu" id="categoryTree">
+                    <!-- Dynamic rendering via JS -->
                 </ul>
             </div>
 
             <!-- Price Filter -->
             <div class="cat-sidebar__box">
-                <div class="cat-sidebar__box-title">Lọc theo giá</div>
+                <div class="cat-sidebar__box-title">LỌC THEO GIÁ</div>
+                <div class="cat-sidebar__box-subtitle">Khoảng giá tham khảo.</div>
                 <div class="cat-sidebar__filter">
                     <div class="cat-price-inputs">
-                        <input type="text" placeholder="Từ" value="">
+                        <div class="input-with-unit">
+                            <input type="text" id="priceMin" placeholder="0 đ" value="">
+                        </div>
                         <span class="cat-price-sep">—</span>
-                        <input type="text" placeholder="Đến" value="">
+                        <div class="input-with-unit">
+                            <input type="text" id="priceMax" placeholder="500.000 đ" value="">
+                        </div>
                     </div>
-                    <button class="cat-filter-btn">ÁP DỤNG</button>
+                    <div class="cat-price-helper">Đơn vị: VNĐ (đ)</div>
+                    <button class="cat-filter-btn" id="applyFilter">ÁP DỤNG</button>
+                    <div class="cat-price-note">Báo giá thực tế theo số lượng & tiêu chuẩn.</div>
                 </div>
             </div>
 
@@ -511,199 +585,24 @@
 
             <!-- Sort bar -->
             <div class="cat-sortbar">
-                <div class="cat-sortbar__count">Hiển thị <strong>1–20</strong> trong <strong>48</strong> sản phẩm</div>
+                <div class="cat-sortbar__count" id="productCount">Hiển thị <strong>0</strong> sản phẩm</div>
                 <div class="cat-sortbar__right">
                     <span class="cat-sortbar__label">Sắp xếp:</span>
-                    <select>
-                        <option>Mới nhất</option>
-                        <option>Xem nhiều nhất</option>
-                        <option>Giá thấp → cao</option>
-                        <option>Giá cao → thấp</option>
+                    <select id="sortProducts">
+                        <option value="newest">Mới nhất</option>
+                        <option value="price-asc">Giá thấp → cao</option>
+                        <option value="price-desc">Giá cao → thấp</option>
                     </select>
                 </div>
             </div>
 
             <!-- Product Grid -->
-            <div class="cat-product-grid">
-
-                <!-- Card 1 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/hero-1.png" alt="Áo sơ mi dài tay công sở" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--hot">HOT</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Áo Sơ Mi Dài Tay Công Sở Xanh Phối Trắng</div>
-                        <div class="cat-card__material">Chất liệu: Kate thun cao cấp</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>290.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 2 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/hero-2.png" alt="Áo sơ mi ngắn tay văn phòng" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--new">MỚI</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Áo Sơ Mi Ngắn Tay Văn Phòng Nam Tím Nhạt</div>
-                        <div class="cat-card__material">Chất liệu: Poly cotton</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>250.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 3 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/hero-3.png" alt="Đồng phục công sở nữ" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--hot">HOT</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Đồng Phục Nữ Sơ Mi + Chân Váy Công Ty</div>
-                        <div class="cat-card__material">Chất liệu: Kate thun mềm</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>320.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 4 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/hero-4.png" alt="Bộ vest công sở" loading="lazy">
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Bộ Vest Công Sở Nam Xanh Navy Cao Cấp</div>
-                        <div class="cat-card__material">Chất liệu: Wool blend</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>550.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 5 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/product-uniform.png" alt="Đồng phục nhà hàng" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--new">MỚI</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Đồng Phục Nhà Hàng Khách Sạn Trắng Đen</div>
-                        <div class="cat-card__material">Chất liệu: Poly cao cấp</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>280.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 6 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/polo.png" alt="Áo polo đồng phục" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--hot">HOT</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Áo Polo Thun Lạnh Đồng Phục Công Ty Nhiều Màu</div>
-                        <div class="cat-card__material">Chất liệu: Thun cá sấu</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>180.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 7 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/product-main.png" alt="Áo bảo hộ phản quang" loading="lazy">
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Áo Phản Quang Công Trình Dải 3M Cao Cấp</div>
-                        <div class="cat-card__material">Chất liệu: Kaki 65/35</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>220.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 8 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/product-pants.png" alt="Quần bảo hộ" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--new">MỚI</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Quần Bảo Hộ Nhiều Túi Kỹ Thuật Chống Mài Mòn</div>
-                        <div class="cat-card__material">Chất liệu: Kaki chống cháy</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>190.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 9 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/product-winter.png" alt="Áo khoác bảo hộ" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--sale">SALE</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Áo Khoác Bảo Hộ 2 Lớp Chống Nước Giữ Nhiệt</div>
-                        <div class="cat-card__material">Chất liệu: Oxford 2 lớp</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>350.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 10 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/biz_team.png" alt="Bộ đồng phục nhà máy FDI" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--hot">HOT</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Bộ Đồng Phục Nhà Máy FDI Có Dây Đeo</div>
-                        <div class="cat-card__material">Chất liệu: Kaki 65/35</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>260.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 11 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/factory-1.png" alt="Đồng phục kỹ thuật" loading="lazy">
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Đồng Phục Kỹ Thuật Có Túi Công Cụ</div>
-                        <div class="cat-card__material">Chất liệu: Poly cao cấp</div>
-                        <div class="cat-card__price"><span class="from">Từ</span>240.000đ</div>
-                    </div>
-                </a>
-
-                <!-- Card 12 -->
-                <a href="product.html" class="cat-card">
-                    <div class="cat-card__img">
-                        <img src="images/factory-2.png" alt="Đồng phục phòng sạch ESD" loading="lazy">
-                        <span class="cat-card__badge cat-card__badge--new">MỚI</span>
-                        <div class="cat-card__quick">Nhận báo giá ngay</div>
-                    </div>
-                    <div class="cat-card__info">
-                        <div class="cat-card__name">Bộ Quần Áo Phòng Sạch ESD Chống Tĩnh Điện</div>
-                        <div class="cat-card__material">Chất liệu: ESD Fabric</div>
-                        <div class="cat-card__price"><span class="from">Liên hệ</span></div>
-                    </div>
-                </a>
-
+            <div class="cat-product-grid" id="productGrid">
+                <!-- Dynamic rendering via JS -->
             </div>
-            <!-- /Product Grid -->
 
-            <!-- Pagination -->
-            <div class="cat-pagination">
-                <a class="cat-page-btn disabled">&#8592;</a>
-                <a class="cat-page-btn active">1</a>
-                <a class="cat-page-btn">2</a>
-                <a class="cat-page-btn">3</a>
-                <span style="font-size:14px; color:#999; padding: 0 4px;">...</span>
-                <a class="cat-page-btn">6</a>
-                <a class="cat-page-btn">&#8594;</a>
-            </div>
+            <!-- Pagination (Dynamic) -->
+            <div id="paginationContainer"></div>
 
             <!-- SEO Block -->
             <div class="cat-seo">

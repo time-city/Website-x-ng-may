@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Đặt Hàng | Dương Thành Tín — Xưởng May B2B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --pdf-accent: #F57C00;
+            --pdf-navy: #0F2A44;
+            --pdf-bg-light: #F8F9FA;
+            --pdf-border: #E5E7EB;
+        }
+
+        .guide-body {
+            font-family: 'Inter', sans-serif;
+            color: var(--pdf-navy);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Hero --- */
+        .guide-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--pdf-bg-light);
+            border-bottom: 1px solid var(--pdf-border);
+        }
+
+        .guide-hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .guide-hero p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .guide-hero__btns {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .guide-hero__btns .btn {
+            padding: 14px 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .guide-hero__btns .primary {
+            background: var(--pdf-accent);
+            color: white;
+        }
+
+        .guide-hero__btns .primary:hover {
+            background: #e67300;
+        }
+
+        .guide-hero__btns .secondary {
+            border: 1px solid var(--pdf-border);
+            color: var(--pdf-navy);
+            background: white;
+        }
+
+        .guide-hero__btns .secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .guide-hero__micro {
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* --- Section Styling --- */
+        .guide-section {
+            padding: 80px 0;
+        }
+
+        .guide-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .guide-section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--pdf-accent);
+            margin: 12px auto 0;
+        }
+
+        /* --- Timeline (Horizontal Grid) --- */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .step-card {
+            background: white;
+            border: 1px solid var(--pdf-border);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .step-card:hover {
+            border-color: var(--pdf-accent);
+        }
+
+        .step-header {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .step-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--pdf-accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .step-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .step-body {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .step-footer {
+            padding: 16px;
+            background: #fff;
+            border-top: 1px solid #f0f0f0;
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 12px;
+        }
+
+        .step-meta-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .step-meta-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--pdf-navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+        }
+
+        .step-meta-val {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .step-marker {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 2px solid var(--pdf-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            z-index: 2;
+        }
+
+        /* --- Checklist --- */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            border: 1px solid var(--pdf-border);
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .checklist-item i {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--pdf-accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+        }
+
+        .checklist-item i::after {
+            content: "✓";
+            position: absolute;
+            top: -5px;
+            left: 2px;
+            color: var(--pdf-accent);
+            font-weight: 900;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .checklist-text {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* --- SLA --- */
+        .sla-block {
+            background: var(--pdf-bg-light);
+            padding: 60px 40px;
+            border-radius: 4px;
+            border: 1px solid var(--pdf-border);
+        }
+
+        .sla-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .sla-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .sla-item p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .sla-item strong {
+            color: var(--pdf-navy);
+        }
+
+        /* --- FAQ --- */
+        .faq-wrap {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--pdf-border);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 20px 0;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--pdf-navy);
+        }
+
+        .faq-answer {
+            height: 0;
+            overflow: hidden;
+            transition: 0.3s;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .faq-item.active .faq-answer {
+            height: auto;
+            padding-bottom: 20px;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--pdf-accent);
+        }
+
+        /* --- Final CTA --- */
+        .final-cta {
+            background: var(--pdf-navy);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .final-cta h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .final-cta .btn {
+            background: var(--pdf-accent);
+            color: white;
+            padding: 16px 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        .final-cta .link {
+            display: block;
+            margin-top: 20px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .final-cta .link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .guide-hero h1 {
+                font-size: 32px;
+            }
+
+            .timeline {
+                border-left: none;
+                padding-left: 0;
+            }
+
+            .timeline-item::before {
+                display: none;
+            }
+
+            .checklist-grid,
+            .sla-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="guide-body">
+
+    <!-- HEADER POPULATED BY SCRIPT -->
+    <div id="header-container"></div>
+
+    <!-- HERO -->
+    <section class="guide-hero">
+        <div class="guide-container">
+            <h1>Hướng dẫn đặt hàng</h1>
+            <p>Quy trình đặt may từ A–Z cho phòng Thu mua &amp; Chủ dự án</p>
+            <div class="guide-hero__btns">
+                <a href="#" class="btn primary">Nhận báo giá trong 24h</a>
+                <a href="#" class="btn secondary" target="_blank">Xem tài liệu quy trình
+                    (Bản nháp)</a>
+            </div>
+            <div class="guide-hero__micro">Quy trình chuẩn – không áp lực ký hợp đồng.</div>
+        </div>
+    </section>
+
+    <!-- STEPS GRID -->
+    <section class="guide-section">
+        <div class="guide-container" style="max-width: 1200px;">
+            <h2 class="guide-section-title">QUY TRÌNH 6 BƯỚC CHUẨN HÓA</h2>
+
+            <div class="step-grid">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">BƯỚC 01</span>
+                        <h3 class="step-title">GỬI YÊU CẦU (BRIEF)</h3>
+                    </div>
+                    <div class="step-body">
+                        <p class="step-desc">Nội dung cần gửi: loại sản phẩm, số lượng, deadline, tiêu chuẩn đặc biệt,
+                            file thiết kế hoặc logo...</p>
+                    </div>
+                    <div class="step-footer">
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">DELIVERABLE</span>
+                            <span class="step-meta-val">Xác nhận yêu cầu + tư vấn sơ bộ</span>
+                        </div>
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">ETA</span>
+                            <span class="step-meta-val">1–2 giờ</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">BƯỚC 02</span>
+                        <h3 class="step-title">CHỌN VẬT LIỆU & CHỐT TIÊU CHUẨN</h3>
+                    </div>
+                    <div class="step-body">
+                        <p class="step-desc">Chúng tôi gợi ý các dòng vải phù hợp: Kaki, Poly, vải kháng khuẩn, ESD...
+                            dựa trên môi trường làm việc.</p>
+                    </div>
+                    <div class="step-footer">
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">DELIVERABLE</span>
+                            <span class="step-meta-val">Bảng đề xuất vật liệu + thông số</span>
+                        </div>
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">ETA</span>
+                            <span class="step-meta-val">0.5–1 ngày</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">BƯỚC 03</span>
+                        <h3 class="step-title">BÁO GIÁ MINH BẠCH (FOB)</h3>
+                    </div>
+                    <div class="step-body">
+                        <p class="step-desc">Chi phí được bóc tách theo từng hạng mục: vật tư, gia công, vận chuyển. Đảm
+                            bảo tính tối ưu hóa ngân sách.</p>
+                    </div>
+                    <div class="step-footer">
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">DELIVERABLE</span>
+                            <span class="step-meta-val">Bảng báo giá + điều kiện sản xuất</span>
+                        </div>
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">ETA</span>
+                            <span class="step-meta-val">24 giờ</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 4 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">BƯỚC 04</span>
+                        <h3 class="step-title">LÀM MẪU (PRE-PRODUCTION)</h3>
+                    </div>
+                    <div class="step-body">
+                        <p class="step-desc">Tiến hành may mẫu thực tế để chốt form dáng, màu sắc và kỹ thuật trước khi
+                            sản xuất hàng loạt.</p>
+                    </div>
+                    <div class="step-footer">
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">DELIVERABLE</span>
+                            <span class="step-meta-val">Mẫu sống + biên bản duyệt mẫu</span>
+                        </div>
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">ETA</span>
+                            <span class="step-meta-val">3–7 ngày</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 600px; margin: 20px auto;">
+                <!-- Step 5 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">BƯỚC 05</span>
+                        <h3 class="step-title">SẢN XUẤT & KCS (SOP 4 BƯỚC)</h3>
+                    </div>
+                    <div class="step-body">
+                        <p class="step-desc">Quy trình kiểm soát chất lượng nghiêm ngặt bao gồm kiểm tra inline và final
+                            QC trước khi đóng gói.</p>
+                    </div>
+                    <div class="step-footer">
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">DELIVERABLE</span>
+                            <span class="step-meta-val">Báo cáo KCS + nghiệm thu</span>
+                        </div>
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">ETA</span>
+                            <span class="step-meta-val">Lead-time</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 6 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">BƯỚC 06</span>
+                        <h3 class="step-title">ĐÓNG GÓI & GIAO HÀNG</h3>
+                    </div>
+                    <div class="step-body">
+                        <p class="step-desc">Giao hàng đúng tiến độ theo lịch trình cam kết. Hỗ trợ vận chuyển tận nơi
+                            trên toàn quốc.</p>
+                    </div>
+                    <div class="step-footer">
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">DELIVERABLE</span>
+                            <span class="step-meta-val">Packing list + lịch giao</span>
+                        </div>
+                        <div class="step-meta-box">
+                            <span class="step-meta-label">ETA</span>
+                            <span class="step-meta-val">Theo nơi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section class="guide-section" style="background: var(--pdf-bg-light);">
+        <div class="guide-container">
+            <h2 class="guide-section-title">Checklist cần chuẩn bị trước khi đặt</h2>
+            <div class="checklist-grid">
+                <div class="checklist-item"><i></i><span class="checklist-text">Số lượng phân bổ theo từng size</span>
+                </div>
+                <div class="checklist-item"><i></i><span class="checklist-text">Logo file vector (AI/PDF/EPS)</span>
+                </div>
+                <div class="checklist-item"><i></i><span class="checklist-text">Mã màu chủ đạo thương hiệu
+                        (Pantone/CMYK)</span></div>
+                <div class="checklist-item"><i></i><span class="checklist-text">Tiêu chuẩn bắt buộc (Phản
+                        quang/ESD/Kháng khuẩn)</span></div>
+                <div class="checklist-item"><i></i><span class="checklist-text">Deadline mong muốn &amp; địa điểm giao
+                        nhận</span></div>
+                <div class="checklist-item"><i></i><span class="checklist-text">Thông tin người phụ trách nghiệm
+                        thu</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLA -->
+    <section class="guide-section">
+        <div class="guide-container">
+            <div class="sla-block">
+                <h2 class="guide-section-title">Chính sách &amp; Cam kết sản xuất (SLA)</h2>
+                <div class="sla-grid">
+                    <div class="sla-item">
+                        <h3>Báo giá bóc tách minh bạch</h3>
+                        <p>Chúng tôi cung cấp bảng báo giá chi tiết, phân rã rõ ràng giữa <strong>vật tư, chi phí sản
+                                xuất và logistics</strong>, không có chi phí ẩn.</p>
+                    </div>
+                    <div class="sla-item">
+                        <h3>Kiểm soát KCS dựa trên Mẫu sống</h3>
+                        <p>Mọi tiêu chuẩn chất lượng khi sản xuất hàng loạt phải <strong>khớp 100% với mẫu vật
+                                lý</strong> đã được khách hàng ký duyệt.</p>
+                    </div>
+                    <div class="sla-item">
+                        <h3>Theo dõi tiến độ bằng Dữ liệu thực</h3>
+                        <p>Khách hàng được cập nhật tiến độ sản xuất thông qua <strong>báo cáo dữ liệu hàng
+                                ngày/tuần</strong> tùy theo quy mô đơn hàng.</p>
+                    </div>
+                    <div class="sla-item">
+                        <h3>Bảo mật thông tin dự án (NDA)</h3>
+                        <p>Chúng tôi cam kết <strong>bảo mật tuyệt đối</strong> các mẫu thiết kế độc quyền và thông tin
+                            nhạy cảm của đối tác doanh nghiệp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="guide-section">
+        <div class="guide-container">
+            <h2 class="guide-section-title">Câu hỏi thường gặp</h2>
+            <div class="faq-wrap">
+                <div class="faq-item">
+                    <button class="faq-question">MOQ tối thiểu bao nhiêu? <span>+</span></button>
+                    <div class="faq-answer">Thông thường MOQ tại xưởng là 20 sản phẩm/mẫu. Đối với các đơn hàng vải đặc
+                        thù, MOQ có thể thay đổi tùy theo yêu cầu của nhà cung cấp vải.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Thời gian làm mẫu mất bao lâu? <span>+</span></button>
+                    <div class="faq-answer">Thời gian may mẫu từ 3–7 ngày làm việc tùy thuộc vào độ phức tạp của mẫu và
+                        tình trạng sẵn có của vật liệu.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Nếu cần gấp thì có phương án nào? <span>+</span></button>
+                    <div class="faq-answer">Chúng tôi có line sản xuất ưu tiên cho các đơn hàng gấp (Fast-track) và kho
+                        vải dự trữ sẵn để rút ngắn lead-time sản xuất.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Có hỗ trợ lên rập/techpack không? <span>+</span></button>
+                    <div class="faq-answer">Dương Thành Tín hỗ trợ toàn diện từ khâu lên rập kỹ thuật đến lập Techpack
+                        chi tiết cho mọi đơn hàng sản xuất.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Cách nghiệm thu khi giao hàng? <span>+</span></button>
+                    <div class="faq-answer">Nghiệm thu dựa trên biên bản bốc thăm ngẫu nhiên AQL hoặc kiểm tra 100% theo
+                        thỏa thuận ban đầu giữa hai bên.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Chính sách xử lý lỗi hàng? <span>+</span></button>
+                    <div class="faq-answer">Chúng tôi cam kết sửa đổi hoặc sản xuất mới đối với 100% sản phẩm lỗi do kỹ
+                        thuật may hoặc sai lệch so với mẫu duyệt.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <h2>Bạn cần báo giá nhanh hoặc chạy thử SOP 4 bước?</h2>
+        <a href="#" class="btn">Nhận báo giá trong 24h</a>
+        <a href="assets/pdf/huong-dan-dat-hang.txt" class="link" target="_blank">Xem checklist RFQ chi tiết</a>
+    </section>
+
+    <!-- FOOTER POPULATED BY SCRIPT -->
+    <div id="footer-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Simple FAQ Toggle for this page if not handled by script.js globally
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const wasActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
+<script>
+    // Simple FAQ Toggle for this page if not handled by script.js globally
+    document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+            const item = q.parentElement;
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!wasActive) item.classList.add('active');
+        });
+    });
+</script>
+</body>
+
+</html>

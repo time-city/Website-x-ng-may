@@ -1503,26 +1503,263 @@ function initHandbookPage() {
 // Call init functions on DOM load (check if already called or add to existing DOMContentLoaded)
 
 /* ===============================================
-   FAQ ACCORDION LOGIC
+   CATEGORY PAGE LOGIC
    =============================================== */
+
+const categoryTree = [
+    {
+        id: 'cong-so',
+        title: 'Đồng phục công sở',
+        subcategories: [
+            { id: 'ao-so-mi-dai', title: 'Áo sơ mi dài tay' },
+            { id: 'ao-so-mi-ngan', title: 'Áo sơ mi ngắn tay' },
+            { id: 'quan-tay-vay', title: 'Quần tây / Chân váy' },
+            { id: 'bo-vest', title: 'Bộ vest công sở' }
+        ]
+    },
+    {
+        id: 'nha-may-bao-ho',
+        title: 'Đồng phục nhà máy / bảo hộ',
+        subcategories: [
+            { id: 'phan-quang', title: 'Áo bảo hộ phản quang' },
+            { id: 'quan-ky-thuat', title: 'Quần bảo hộ kỹ thuật' },
+            { id: 'ao-khoac-gio', title: 'Áo khoác gió bảo hộ' },
+            { id: 'cong-nhan-co-khi', title: 'Đồng phục công nhân cơ khí' }
+        ]
+    },
+    {
+        id: 'y-te',
+        title: 'Đồng phục y tế',
+        subcategories: [
+            { id: 'blouse', title: 'Áo blouse' },
+            { id: 'scrub', title: 'Bộ scrub' },
+            { id: 'dieu-duong', title: 'Áo điều dưỡng' },
+            { id: 'phong-sach', title: 'Đồng phục phòng sạch (ESD)' }
+        ]
+    },
+    {
+        id: 'polo-doanh-nghiep',
+        title: 'Áo Polo doanh nghiệp',
+        subcategories: [
+            { id: 'polo-cotton', title: 'Polo cotton' },
+            { id: 'polo-ca-sau', title: 'Polo cá sấu (lacoste)' },
+            { id: 'polo-quick-dry', title: 'Polo quick-dry' },
+            { id: 'polo-phoi-mau', title: 'Polo phối màu theo nhận diện' }
+        ]
+    },
+    {
+        id: 'truong-hoc',
+        title: 'Đồng phục trường học',
+        subcategories: [
+            { id: 'ao-thun-truong', title: 'Áo thun đồng phục' },
+            { id: 'ao-khoac-truong', title: 'Áo khoác đồng phục' },
+            { id: 'the-duc', title: 'Đồng phục thể dục' }
+        ]
+    },
+    {
+        id: 'vai-si',
+        title: 'Vải sỉ công nghiệp',
+        subcategories: [
+            { id: 'vai-kaki', title: 'Vải Kaki' },
+            { id: 'vai-pangrim', title: 'Vải Pangrim' },
+            { id: 'vai-kate', title: 'Vải Kate / Poplin' },
+            { id: 'vai-esd', title: 'Vải chống tĩnh điện / kháng khuẩn' }
+        ]
+    }
+];
+
+const products = [
+    { id: 1, title: 'Áo Sơ Mi Dài Tay Công Sở Xanh Phối Trắng', category: 'cong-so', subcategory: 'ao-so-mi-dai', price: 290000, image: 'images/hero-1.png', tags: ['HOT'], material: 'Kate thun cao cấp' },
+    { id: 2, title: 'Áo Sơ Mi Ngắn Tay Văn Phòng Nam Tím Nhạt', category: 'cong-so', subcategory: 'ao-so-mi-ngan', price: 250000, image: 'images/hero-2.png', tags: ['NEW'], material: 'Poly cotton' },
+    { id: 3, title: 'Đồng Phục Nữ Sơ Mi + Chân Váy Công Ty', category: 'cong-so', subcategory: 'ao-so-mi-dai', price: 320000, image: 'images/hero-3.png', tags: ['HOT'], material: 'Kate thun mềm' },
+    { id: 4, title: 'Bộ Vest Công Sở Nam Xanh Navy Cao Cấp', category: 'cong-so', subcategory: 'bo-vest', price: 550000, image: 'images/hero-4.png', tags: [], material: 'Wool blend' },
+    { id: 5, title: 'Áo Bảo Hộ Phản Quang Kỹ Sư 3M', category: 'nha-may-bao-ho', subcategory: 'phan-quang', price: 220000, image: 'images/product-main.png', tags: ['NEW'], material: 'Kaki 65/35' },
+    { id: 6, title: 'Áo Blouse Bác Sĩ Nam Nữ Cổ Bẻ chuyên dụng', category: 'y-te', subcategory: 'blouse', price: 280000, image: 'images/product-uniform.png', tags: ['HOT'], material: 'Kate Silk' },
+    { id: 7, title: 'Áo Polo Thun Cá Sấu Đồng Phục Doanh Nghiệp', category: 'polo-doanh-nghiep', subcategory: 'polo-ca-sau', price: 180000, image: 'images/polo.png', tags: [], material: 'Thun cá sấu 4 chiều' },
+    { id: 8, title: 'Bộ Quần Áo Phòng Sạch ESD Chống Tĩnh Điện', category: 'y-te', subcategory: 'phong-sach', price: 210000, image: 'images/factory-2.png', tags: ['NEW'], material: 'ESD Fabric' }
+];
+
+let activeCategory = 'cong-so';
+let activeSubcategory = null;
+let currentFilters = { min: 0, max: Infinity, sort: 'newest' };
+
+function renderCategoryTree() {
+    const container = document.getElementById('categoryTree');
+    if (!container) return;
+
+    container.innerHTML = categoryTree.map(cat => {
+        const hasSub = cat.subcategories && cat.subcategories.length > 0;
+        const isOpen = cat.id === activeCategory;
+        
+        let html = `
+            <li class="${hasSub ? 'has-submenu' : ''} ${isOpen ? 'open' : ''}">
+                <a class="parent-link" data-id="${cat.id}">
+                    ${cat.title}
+                    ${hasSub ? '<span class="arrow">▼</span>' : ''}
+                </a>
+        `;
+
+        if (hasSub) {
+            html += `<ul class="cat-sidebar__submenu">`;
+            cat.subcategories.forEach(sub => {
+                const isSubActive = sub.id === activeSubcategory;
+                html += `
+                    <li>
+                        <a href="#" class="sub-link ${isSubActive ? 'active' : ''}" 
+                           data-parent="${cat.id}" data-id="${sub.id}">
+                            ${sub.title}
+                        </a>
+                    </li>
+                `;
+            });
+            html += `</ul>`;
+        }
+        
+        html += `</li>`;
+        return html;
+    }).join('');
+
+    // Re-attach events
+    attachCategoryEvents();
+}
+
+function attachCategoryEvents() {
+    // Parent links
+    document.querySelectorAll('.parent-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = link.getAttribute('data-id');
+            const li = link.parentElement;
+            
+            if (li.classList.contains('has-submenu')) {
+                const wasOpen = li.classList.contains('open');
+                
+                // Set as active category
+                activeCategory = id;
+                activeSubcategory = null;
+                
+                // Toggle accordion interaction
+                if (!wasOpen) {
+                    document.querySelectorAll('.cat-sidebar__menu li').forEach(item => item.classList.remove('open'));
+                    li.classList.add('open');
+                } else {
+                    li.classList.remove('open');
+                }
+            } else {
+                activeCategory = id;
+                activeSubcategory = null;
+                document.querySelectorAll('.cat-sidebar__menu li').forEach(item => item.classList.remove('open'));
+            }
+            
+            renderCategoryTree();
+            filterAndRender();
+        });
+    });
+
+    // Sub links
+    document.querySelectorAll('.sub-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            activeCategory = link.getAttribute('data-parent');
+            activeSubcategory = link.getAttribute('data-id');
+            
+            renderCategoryTree();
+            filterAndRender();
+        });
+    });
+}
+
+function filterAndRender() {
+    let filtered = products.filter(p => {
+        const catMatch = activeCategory ? p.category === activeCategory : true;
+        const subMatch = activeSubcategory ? p.subcategory === activeSubcategory : true;
+        const priceMatch = p.price >= currentFilters.min && p.price <= currentFilters.max;
+        return catMatch && subMatch && priceMatch;
+    });
+
+    // Sorting
+    if (currentFilters.sort === 'price-asc') {
+        filtered.sort((a, b) => a.price - b.price);
+    } else if (currentFilters.sort === 'price-desc') {
+        filtered.sort((a, b) => b.price - a.price);
+    } else {
+        filtered.sort((a, b) => b.id - a.id); // Newest by ID
+    }
+
+    renderProducts(filtered);
+}
+
+function renderProducts(list) {
+    const grid = document.getElementById('productGrid');
+    const countDisplay = document.getElementById('productCount');
+    if (!grid) return;
+
+    countDisplay.innerHTML = `Hiển thị <strong>${list.length}</strong> sản phẩm`;
+
+    if (list.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #888;">Không tìm thấy sản phẩm nào trong khoảng giá này.</div>`;
+        return;
+    }
+
+    grid.innerHTML = list.map(p => `
+        <a href="product.html" class="cat-card">
+            <div class="cat-card__img">
+                <img src="${p.image}" alt="${p.title}" loading="lazy">
+                ${p.tags.map(tag => `<span class="cat-card__badge cat-card__badge--${tag.toLowerCase() === 'hot' ? 'hot' : tag.toLowerCase() === 'new' ? 'new' : 'sale'}">${tag}</span>`).join('')}
+                <div class="cat-card__quick">Nhận báo giá sỉ</div>
+            </div>
+            <div class="cat-card__info">
+                <div class="cat-card__name">${p.title}</div>
+                <div class="cat-card__material">Chất liệu: ${p.material || 'Đang cập nhật'}</div>
+                <div class="cat-card__price">
+                    <span class="from">Từ</span>${p.price.toLocaleString('vi-VN')}đ
+                </div>
+            </div>
+        </a>
+    `).join('');
+}
+
+function initCategoryPage() {
+    if (!document.getElementById('productGrid')) return;
+
+    renderCategoryTree();
+    filterAndRender();
+
+    // Price Filter Event
+    const applyBtn = document.getElementById('applyFilter');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', () => {
+            const min = parseInt(document.getElementById('priceMin').value.replace(/\D/g, '')) || 0;
+            const max = parseInt(document.getElementById('priceMax').value.replace(/\D/g, '')) || Infinity;
+            currentFilters.min = min;
+            currentFilters.max = max;
+            filterAndRender();
+        });
+    }
+
+    // Sort Event
+    const sortSelect = document.getElementById('sortProducts');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            currentFilters.sort = e.target.value;
+            filterAndRender();
+        });
+    }
+}
+
+// Re-init on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+    initCategoryPage();
+
+    // FAQ ACCORDION LOGIC
     const faqItems = document.querySelectorAll('.faq-item-b2b');
-    
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question-b2b');
-        
         question.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
-            
-            // Close all other items
-            faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-            });
-            
-            // Toggle current item
-            if (!isActive) {
-                item.classList.add('active');
-            }
+            faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
         });
     });
 });

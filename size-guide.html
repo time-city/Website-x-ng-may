@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng Dẫn Chọn Size | Dương Thành Tín — Xưởng May B2B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --pdf-accent: #F57C00;
+            --pdf-navy: #0F2A44;
+            --pdf-bg-light: #F8F9FA;
+            --pdf-border: #E5E7EB;
+            --pdf-error: #FEF2F2;
+            --pdf-error-border: #FEE2E2;
+        }
+
+        .guide-body {
+            font-family: 'Inter', sans-serif;
+            color: var(--pdf-navy);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        .guide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Hero --- */
+        .guide-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--pdf-bg-light);
+            border-bottom: 1px solid var(--pdf-border);
+        }
+
+        .guide-hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .guide-hero p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .guide-hero .btn-pdf {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 1px solid var(--pdf-border);
+            color: var(--pdf-navy);
+            background: white;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .guide-hero .btn-pdf:hover {
+            background: #f0f0f0;
+        }
+
+        /* --- Section Styling --- */
+        .guide-section {
+            padding: 60px 0;
+        }
+
+        .guide-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .guide-section-title::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--pdf-accent);
+            margin: 10px auto 0;
+        }
+
+        /* --- Measurement Cards --- */
+        .measure-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .measure-card {
+            background: white;
+            border: 1px solid var(--pdf-border);
+            padding: 20px 16px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .measure-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--pdf-accent);
+        }
+
+        .measure-card p {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .measure-note {
+            font-size: 11px;
+            color: #999;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 8px;
+        }
+
+        /* --- Tabs --- */
+        .guide-tabs {
+            margin-top: 40px;
+        }
+
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid var(--pdf-border);
+            gap: 20px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .tab-btn.active {
+            color: var(--pdf-navy);
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--pdf-accent);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- Size Table --- */
+        .size-table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background: var(--pdf-bg-light);
+            text-align: left;
+            padding: 12px 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid var(--pdf-border);
+            color: #555;
+        }
+
+        td {
+            padding: 12px 16px;
+            border: 1px solid var(--pdf-border);
+            font-size: 14px;
+            color: #444;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .table-note {
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* --- Procurement Flow --- */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .flow-item {
+            padding: 24px;
+            border: 1px solid var(--pdf-border);
+            border-radius: 4px;
+            background: var(--pdf-bg-light);
+        }
+
+        .flow-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--pdf-accent);
+            margin-bottom: 12px;
+            opacity: 0.3;
+        }
+
+        .flow-item h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .flow-item p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* --- Error Box --- */
+        .error-section {
+            background: var(--pdf-error);
+            border-radius: 4px;
+            border: 1px solid var(--pdf-error-border);
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .error-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .error-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .error-item i {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #EF4444;
+            color: white;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 900;
+            margin-top: 2px;
+        }
+
+        .error-item p {
+            font-size: 14px;
+            font-weight: 500;
+            color: #991B1B;
+        }
+
+        /* --- CTA --- */
+        .final-cta {
+            background: var(--pdf-navy);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .final-cta h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .final-cta .btn {
+            background: var(--pdf-accent);
+            color: white;
+            padding: 14px 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        @media (max-width: 900px) {
+            .measure-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .flow-grid,
+            .error-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="guide-body">
+
+    <!-- HEADER POPULATED BY SCRIPT -->
+    <div id="header-container"></div>
+
+    <!-- HERO -->
+    <section class="guide-hero">
+        <div class="guide-container">
+            <h1>Hướng dẫn chọn size</h1>
+            <p>Bảng size chuẩn theo từng dòng sản phẩm + cách đo nhanh để tránh sai form</p>
+            <a href="#" class="btn-pdf" target="_blank">Xem bảng size chi tiết (Bản
+                nháp)</a>
+        </div>
+    </section>
+
+    <!-- MEASUREMENT GUIDE -->
+    <section class="guide-section">
+        <div class="guide-container">
+            <h2 class="guide-section-title">Cách đo 5 vị trí cơ bản</h2>
+            <div class="measure-grid">
+                <div class="measure-card">
+                    <h3>Vòng ngực</h3>
+                    <p>Đo quanh phần nở nhất của ngực.</p>
+                    <div class="measure-note">Sai số chấp nhận ±1cm</div>
+                </div>
+                <div class="measure-card">
+                    <h3>Vòng eo</h3>
+                    <p>Đo quanh phần thắt nhỏ nhất của eo.</p>
+                    <div class="measure-note">Sai số chấp nhận ±1cm</div>
+                </div>
+                <div class="measure-card">
+                    <h3>Vòng mông</h3>
+                    <p>Đo quanh phần nở nhất của mông.</p>
+                    <div class="measure-note">Sai số chấp nhận ±1cm</div>
+                </div>
+                <div class="measure-card">
+                    <h3>Dài áo</h3>
+                    <p>Từ điểm cao nhất của vai xuống lai áo.</p>
+                    <div class="measure-note">Sai số chấp nhận ±1cm</div>
+                </div>
+                <div class="measure-card">
+                    <h3>Dài tay / quần</h3>
+                    <p>Đo từ đỉnh vai đến cổ tay hoặc từ eo xuống mắt cá.</p>
+                    <div class="measure-note">Sai số chấp nhận ±1cm</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIZE TABLES -->
+    <section class="guide-section" style="background: var(--pdf-bg-light);">
+        <div class="guide-container">
+            <h2 class="guide-section-title">Chọn size theo dòng sản phẩm</h2>
+
+            <div class="guide-tabs">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="polo">Áo thun / Polo</button>
+                    <button class="tab-btn" data-tab="somi">Áo sơ mi</button>
+                    <button class="tab-btn" data-tab="khoac">Áo khoác / Gió</button>
+                    <button class="tab-btn" data-tab="baoho">Bảo hộ / Quần tây</button>
+                    <button class="tab-btn" data-tab="yte">Đồng phục Y tế</button>
+                </div>
+
+                <div class="tab-content active" id="polo">
+                    <div class="size-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thông số (cm)</th>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>XXL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vòng ngực</td>
+                                    <td>92</td>
+                                    <td>96</td>
+                                    <td>100</td>
+                                    <td>104</td>
+                                    <td>108</td>
+                                </tr>
+                                <tr>
+                                    <td>Vòng eo</td>
+                                    <td>88</td>
+                                    <td>92</td>
+                                    <td>96</td>
+                                    <td>100</td>
+                                    <td>104</td>
+                                </tr>
+                                <tr>
+                                    <td>Dài áo</td>
+                                    <td>66</td>
+                                    <td>68</td>
+                                    <td>70</td>
+                                    <td>72</td>
+                                    <td>74</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="somi">
+                    <div class="size-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thông số (cm)</th>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>XXL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vòng ngực</td>
+                                    <td>94</td>
+                                    <td>98</td>
+                                    <td>102</td>
+                                    <td>106</td>
+                                    <td>110</td>
+                                </tr>
+                                <tr>
+                                    <td>Vòng eo</td>
+                                    <td>90</td>
+                                    <td>94</td>
+                                    <td>98</td>
+                                    <td>102</td>
+                                    <td>106</td>
+                                </tr>
+                                <tr>
+                                    <td>Dài áo</td>
+                                    <td>68</td>
+                                    <td>70</td>
+                                    <td>72</td>
+                                    <td>74</td>
+                                    <td>76</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="khoac">
+                    <!-- Sample data for jackets -->
+                    <div class="size-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thông số (cm)</th>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>XXL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vòng ngực</td>
+                                    <td>100</td>
+                                    <td>104</td>
+                                    <td>108</td>
+                                    <td>112</td>
+                                    <td>116</td>
+                                </tr>
+                                <tr>
+                                    <td>Dài áo</td>
+                                    <td>62</td>
+                                    <td>64</td>
+                                    <td>66</td>
+                                    <td>68</td>
+                                    <td>70</td>
+                                </tr>
+                                <tr>
+                                    <td>Dài tay</td>
+                                    <td>58</td>
+                                    <td>60</td>
+                                    <td>62</td>
+                                    <td>64</td>
+                                    <td>66</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="baoho">
+                    <div class="size-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thông số (cm)</th>
+                                    <th>28</th>
+                                    <th>29</th>
+                                    <th>30</th>
+                                    <th>31</th>
+                                    <th>32</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vòng bụng</td>
+                                    <td>74</td>
+                                    <td>76</td>
+                                    <td>78</td>
+                                    <td>80</td>
+                                    <td>82</td>
+                                </tr>
+                                <tr>
+                                    <td>Vòng mông</td>
+                                    <td>92</td>
+                                    <td>94</td>
+                                    <td>96</td>
+                                    <td>98</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>Dài quần</td>
+                                    <td>98</td>
+                                    <td>100</td>
+                                    <td>102</td>
+                                    <td>102</td>
+                                    <td>104</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="yte">
+                    <div class="size-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thông số (cm)</th>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>XXL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vòng ngực</td>
+                                    <td>96</td>
+                                    <td>100</td>
+                                    <td>104</td>
+                                    <td>108</td>
+                                    <td>112</td>
+                                </tr>
+                                <tr>
+                                    <td>Vòng eo</td>
+                                    <td>92</td>
+                                    <td>96</td>
+                                    <td>100</td>
+                                    <td>104</td>
+                                    <td>108</td>
+                                </tr>
+                                <tr>
+                                    <td>Dài áo</td>
+                                    <td>70</td>
+                                    <td>72</td>
+                                    <td>74</td>
+                                    <td>76</td>
+                                    <td>78</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-note">Lưu ý: Sai số kỹ thuật ±1cm. Form dáng B2B chuẩn quốc tế.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCUREMENT FLOW -->
+    <section class="guide-section">
+        <div class="guide-container">
+            <h2 class="guide-section-title">Quy trình thu size cho doanh nghiệp</h2>
+            <div class="flow-grid">
+                <div class="flow-item">
+                    <div class="flow-num">01</div>
+                    <h4>Phát form thu size</h4>
+                    <p>Phát bảng Excel hoặc Google Sheet mẫu cho nhân viên tự đăng ký dựa trên bảng size chuẩn.</p>
+                </div>
+                <div class="flow-item">
+                    <div class="flow-num">02</div>
+                    <h4>Chốt size theo tỷ lệ</h4>
+                    <p>Đội ngũ của chúng tôi tư vấn Size Ratio (tỷ lệ vàng) để dự phòng cho nhân sự mới.</p>
+                </div>
+                <div class="flow-item">
+                    <div class="flow-num">03</div>
+                    <h4>Duyệt mẫu size</h4>
+                    <p>Bộ phận thu mua kiểm duyệt lại mẫu thực tế để đảm bảo form dáng đúng kỳ vọng.</p>
+                </div>
+            </div>
+
+            <!-- Error Box -->
+            <div class="error-section">
+                <h3 style="font-family:'Outfit'; font-size:18px; font-weight:800; color:#B91C1C;">4 Lỗi hay gặp khi chọn
+                    size</h3>
+                <div class="error-grid">
+                    <div class="error-item"><i>!</i>
+                        <p>Chọn size theo thói quen mà không tham khảo bảng đo thực tế.</p>
+                    </div>
+                    <div class="error-item"><i>!</i>
+                        <p>Nhầm lẫn giữa size Nam và Nữ trong các dòng áo Polo/Sơ mi.</p>
+                    </div>
+                    <div class="error-item"><i>!</i>
+                        <p>Không tính đến độ co giãn của vải (Cotton 100% co nhiều hơn Poly).</p>
+                    </div>
+                    <div class="error-item"><i>!</i>
+                        <p>Không chốt Size Ratio dự phòng trước khi lên đơn hàng loạt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="guide-container">
+            <h2>Bạn cần bảng size chuẩn theo dòng sản phẩm của bạn?</h2>
+            <a href="#" class="btn">Nhận tư vấn size &amp; form dáng</a>
+        </div>
+    </section>
+
+    <!-- FOOTER POPULATED BY SCRIPT -->
+    <div id="footer-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab switching logic
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
